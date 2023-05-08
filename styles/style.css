@@ -1,3 +1,19 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 h1{
     color: green;
+}
+
+.navbar{
+    display: flex;
+    justify-content: space-between;
+    background-color: #1DB954;
+    height: 20px;
+    margin: 0px auto;
+    padding: 0px;
+
 }

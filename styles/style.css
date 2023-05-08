@@ -18,6 +18,7 @@ h1{
 
 a.logo {
     color: #FFFFFF;
+    padding-left: 5%;
     font-size: x-large;
     font-family: Arial, Helvetica, sans-serif;
 }
@@ -51,7 +52,7 @@ a.active {
     justify-content: space-between;
     align-items: center;
     background-color: #1DB954;
-    height: 40px;
+    height: 60px;
     margin: 0px auto;
     padding: 0px;
 }
@@ -79,7 +80,7 @@ a.active {
 
 a.login {
     background-color: #000000;
-    padding: 14px 25px;
+    padding: 20px 30px;
     margin: auto;
     color: #1DB954;
     text-align: center;

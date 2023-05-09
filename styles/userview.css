@@ -76,3 +76,12 @@ table{
     margin: 0 0 10px;
 
 }
+
+button{
+    font-family: poppins;
+    background-color: #c8e6cd;
+    border-color: #7c9c82;
+    color: #58755d;
+    border-radius: 3px;
+
+}

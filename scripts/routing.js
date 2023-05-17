@@ -7,7 +7,13 @@ $("#click").on("click", async function(){
 });
 
 
-async function  getAuthLink(){
+//get code and state from callack url
+//send them to the /exchange/
+//recieves token and user name
+//get the actual playlist using get temp playlist
+//display playlist using jsons
+
+async function getAuthLink(){
     
 	const response = await fetch("https://spotlist.patchyserver.xyz/api/auth", {
 	method: 'GET',

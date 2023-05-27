@@ -11,7 +11,7 @@ a {
 
 h1{
     color: #FFFFFF;
-    font-size: 47px;
+    font-size: x-large;
     font-family: "Inter", Arial, Helvetica, sans-serif;
     text-align: center;
 }
@@ -66,18 +66,6 @@ a.active {
     justify-content: center, space-between;
 
 }
-
-.main-content {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    margin: auto;
-    align-content: center;
-    text-align: center;
-
-}
-
 
 
 /*start background*/
@@ -175,7 +163,6 @@ body{
 
 /*end background*/
 
-
 a.login {
     background-color: #1DB954;
     padding: 20px 30px;
@@ -187,6 +174,24 @@ a.login {
     font-family: "Inter", Arial, Helvetica, sans-serif;
 }
 
+.how-it-works {
+    position: fixed;
+    top: 35%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    margin: auto;
+    align-content: center;
+    text-align: center;
+}
 
 
+ol.how-it-works {
+    position: relative;
+    margin: auto;
+    color: #FFFFFF;
+    text-align: left;
+    display: inline-block;
+    font-size: medium;
+    font-family: "Inter", Arial, Helvetica, sans-serif;
+}
 

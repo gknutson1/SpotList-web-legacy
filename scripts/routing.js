@@ -1,4 +1,12 @@
 
+
+$("#click").on("click", async function(){
+    var link = await getAuthLink();
+	window.location.href = link;
+
+});
+
+
 //get code and state from callack url DONE
 //send them to the /exchange/
 //recieves token and user name
@@ -34,10 +42,10 @@ async function getCodeAndState(){
 
 	code = urlParams.get('code');
 	state = urlParams.get('state');
-
 	setIDandToken();
-	//setPlaylistInfo();
-	window.location.href = "/index";
+	var playlist = await getPlaylistInfo();
+	console.log(playlist);
+	window.location.href = "/userview";
 
 }
 var newURL;
@@ -63,9 +71,12 @@ var username;
 async function setIDandToken(){
 	const exchange = await getTokenandID();
 	user_id = exchange.user_id;
+	document.cookie = "user_id=" + exchange.user_id + ";";
 	token = exchange.token;
+	document.cookie = "token=" + exchange.token + ";";
 	username = exchange.display_name;
-	alert("Hello " + username + "!" );
+	document.cookie = "username=" + exchange.username + ";";
+
 }
 
 async function getPlaylistInfo(){
@@ -78,8 +89,13 @@ async function getPlaylistInfo(){
 	}).catch((error)=>{
 		console.error('Error:',error);
 	})
-	console.log(response.json())
 	return response.json();
+}
+
+function displayUsername(){
+	document.getElementById("username").innerHTML = "Hello " + username;
+
+
 }
 
 

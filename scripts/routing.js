@@ -42,10 +42,12 @@ async function getCodeAndState(){
 
 	code = urlParams.get('code');
 	state = urlParams.get('state');
+
+//	flushCookies()
+
 	setIDandToken();
-	var playlist = await getPlaylistInfo();
-	console.log(playlist);
-	window.location.href = "/userview";
+
+	//window.location.href = "/userview";
 
 }
 var newURL;
@@ -63,24 +65,16 @@ async function getTokenandID(){
 	return response.json();
 }
 
-
-var user_id;
-var token;
-var username;
-
 async function setIDandToken(){
 	const exchange = await getTokenandID();
-	user_id = exchange.user_id;
+
 	document.cookie = "user_id=" + exchange.user_id + ";";
-	token = exchange.token;
 	document.cookie = "token=" + exchange.token + ";";
-	username = exchange.display_name;
-	document.cookie = "username=" + exchange.username + ";";
-
+	document.cookie = "displayName=" + exchange.display_name + ";";
 }
-
+// + "&token=" + getCookie("token")
 async function getPlaylistInfo(){
-	const response = await fetch("https://spotlist.patchyserver.xyz/api/temp/playlists?user_id=" + user_id + "&token=" + token,{
+	const response = await fetch("https://spotlist.patchyserver.xyz/api/playlists?user_id=" + getCookie("user_id"),{
 		method: 'GET',
 		headers: {
 			'Content-type': 'application/json',
@@ -93,9 +87,40 @@ async function getPlaylistInfo(){
 }
 
 function displayUsername(){
-	document.getElementById("username").innerHTML = "Hello " + username;
+	document.getElementById("username").innerHTML = "Hello " + getCookie("displayName");
+
+
+}
+function flushCookies(){
+	
+	document.cookie = "displayName=; expires=Thu, 01 Jan 1970 00:00:01 GMT";
+	document.cookie = "token=; expires=Thu, 01 Jan 1970 00:00:01 GMT;"; 
+	document.cookie = "user_id=; expires=Thu, 01 Jan 1970 00:00:01 GMT;";
 
 
 }
 
+function getCookie(value){
+	var cookieString = document.cookie.substr(document.cookie.indexOf(value));
+	
+	if( cookieString.indexOf(";") == -1){
+		var cookieValue = cookieString.substring(cookieString.indexOf("=") + 1, cookieString.length);
+	}
+	else{
+	var cookieValue = cookieString.substring(cookieString.indexOf("=") + 1, cookieString.indexOf(";"));
+	}
+	return cookieValue;
+	
+}
+
+function checkCookie(value){
+	const startingIndex = document.cookie.indexOf(value);
+	if(startingIndex === -1){
+
+		return false;	
+	}
+	else{
+		return true;
+	}
+}
 

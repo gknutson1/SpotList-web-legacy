@@ -1,0 +1,24 @@
+<html>
+    <head>
+        <title>SpotList Playlist Demo</title>
+        <link href="styles/userview.css" rel="stylesheet">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js" defer></script>
+        <script src="scripts/script.js"defer></script>
+        <script src="scripts/routing.js" defer></script>
+    </head>
+    <h1>Basic searching for a user</h1>
+    <label for="searchTerm">What do would you like to search for?</label>
+    <form id="searchForm">
+    <input type="text" id="searchTerm" name="SearchTerm">
+    <br>
+    <select for="types">
+    <option value="playlist">Playlists</option>
+    <option value="track">Songs</option>
+    <option value="artist">Artist</option>
+    <option value="album">Albums</option>
+    
+    </select> 
+    </form>
+    <br>
+    <button type= "submit" id="confirmSearch">Click Me</button>
+</html>

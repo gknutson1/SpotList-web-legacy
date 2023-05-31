@@ -39,8 +39,10 @@ async function getCodeAndState(){
 //	flushCookies()
 
 	setIDandToken();
-
-	window.location.href = "/userview";
+	setTimeout(function(){
+		window.location.href = "/userview";
+	}, 600);
+	
 
 }
 var newURL;
@@ -80,7 +82,7 @@ async function getPlaylistInfo(){
 }
 
 function displayUsername(){
-	document.getElementById("username").innerHTML = "Hello " + getCookie("displayName");
+	document.getElementById("username").innerHTML = getCookie("displayName");
 
 
 }
@@ -115,5 +117,10 @@ function checkCookie(value){
 	else{
 		return true;
 	}
+}
+
+function createPlaylist(){
+	const playlistInfo = document.getElementById("playlist-creation-info");
+	
 }
 

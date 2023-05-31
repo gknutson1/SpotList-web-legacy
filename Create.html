@@ -1,0 +1,53 @@
+<html>
+    <head>
+        <title>SpotList Playlist Creation Demo</title>
+        <link href="styles/userview.css" rel="stylesheet">
+        <script src="scripts/script.js"defer ></script>
+        <script src="scripts/routing.js" defer></script>
+    </head>
+     <body>
+
+        <h1>Create a Playlist based on Rules demo</h1>
+        <form id="playlist-creation-info">
+            <label for="playlist-name">Please enter the name of your new playlsit</label>
+            <br>
+            <input type="text" id="playlist-name">
+            <br>
+            <labe for="playlist-desc">Please enter the description you want for your playlist</label>
+            <br>
+            <textarea id="playlist-desc"></textarea>
+            <br>
+
+        <label>Would you like the playlist to be public or private</label>
+            <div>
+                <input type="radio" id="public" name="playlist-vis" value="public" checked>
+                <label for="public">Public</label>
+             </div>
+
+         <div>
+             <input type="radio" id="private" name="playlist-vis" value="private">
+             <label for="Private">Private</label>
+         </div>
+
+        </form>
+        <form id="rules-creation">
+            <label for="filter-id">Please enter your search term</label>
+            <br>
+            <input type="text" id="filter-id">
+            <br>
+            <label for="filter-choice">Please select your filter</label>
+            <br>
+            <select id="filter-choice">
+                <option value="album">Album</option>
+                <option value="artist">Artist</option>
+                <option value="playlist">Artist</option>
+                <option value="track">Track</option>
+                <option value="show">Show</option>
+                <option value="episode">Episode</option>
+                <option value="audiobook">AudioBook</option>
+            </select>
+        </form>
+
+        <button id="confirm-playlist" >Create Playlist</button>
+    </body>
+</html>

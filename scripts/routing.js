@@ -1,9 +1,9 @@
 
 
-// $("#click").on("click", async function(){
-//     var link = await getAuthLink();
-// 	window.location.href = link;
-// });
+$("#click").on("click", async function(){
+    var link = await getAuthLink();
+	window.location.href = link;
+});
 
 async function getAuthLink(){
     
@@ -40,7 +40,7 @@ async function getCodeAndState(){
 	setIDandToken();
 	setTimeout(function(){
 		window.location.href = "/userview";
-	}, 600);
+	}, 1000);
 	
 
 }

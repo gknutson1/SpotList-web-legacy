@@ -1,10 +1,9 @@
 
 
-$("#click").on("click", async function(){
-    var link = await getAuthLink();
-	window.location.href = link;
-
-});
+// $("#click").on("click", async function(){
+//     var link = await getAuthLink();
+// 	window.location.href = link;
+// });
 
 async function getAuthLink(){
     
@@ -67,7 +66,7 @@ async function setIDandToken(){
 	document.cookie = "token=" + exchange.token + ";";
 	document.cookie = "displayName=" + exchange.display_name + ";";
 }
-// + "&token=" + getCookie("token")
+
 async function getPlaylistInfo(){
 	const response = await fetch("https://spotlist.patchyserver.xyz/api/playlists?user_id=" + getCookie("user_id"),{
 		method: 'GET',
@@ -119,8 +118,43 @@ function checkCookie(value){
 	}
 }
 
-function createPlaylist(){
-	const playlistInfo = document.getElementById("playlist-creation-info");
-	
+document.getElementById("create-playlist").addEventListener("click", function(){
+	getPlaylist()});
+
+ async function getPlaylist(){
+
+	 const playlistInfo = document.getElementById("playlist-creation-info").elements;
+	 const artistInfo = document.getElementById("rules-creation").elements;
+
+	const nameArtist =  playlistInfo[0].value;
+	const nameDescription = playlistInfo[1].value;	
+	const nameVis = playlistInfo[2].value;	
+
+	 const artistName = artistInfo[0].value;
+	 const filter = artistInfo[1].value;
+
+
+	let artistID = await getID(artistName, filter);
+ 
+	document.getElementById("artist_id").innerHTML = artistID;
+
+};
+
+async function getID(artist_name, type){
+	const artist = await getPlaylistInfo2(artist_name, type).then(res => {return res.artists[0].spotify_id});
+	return artist
 }
 
+async function getPlaylistInfo2(artist_name, type){
+	const response = await fetch("https://spotlist.patchyserver.xyz/api/search?types=" + type + "&query=" + artist_name + "&limit=1&offset=0",{
+		method: 'GET',
+		headers: {
+			'Accept': 'application/json',
+			'user-id': getCookie("user_id"),
+			'token': getCookie("token")
+		}
+	}).catch((error)=>{
+		console.error('Error:',error);
+	})
+	return response.json();
+}

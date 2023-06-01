@@ -6,8 +6,9 @@
         <script src="scripts/routing.js" defer></script>
     </head>
      <body>
+        <button id="home-button">Go Home</button>
 
-        <h1>Create a Playlist based on Rules demo</h1>
+        <h1>Create a Playlist Based on Currated Rules</h1>
         <form id="playlist-creation-info">
             <label for="playlist-name">Please enter the name of your new playlsit</label>
             <br>
@@ -26,7 +27,7 @@
 
          <div>
              <input type="radio" id="private" name="playlist-vis" value="private">
-             <label for="Private">Private</label>
+             <label for="private">Private</label>
          </div>
 
         </form>
@@ -39,7 +40,7 @@
             <br>
             <select id="filter-choice">
                 <option value="album">Album</option>
-                <option value="artist">Artist</option>
+                <option value="artist" selected>Artist</option>
                 <option value="playlist">Artist</option>
                 <option value="track">Track</option>
                 <option value="show">Show</option>
@@ -48,6 +49,9 @@
             </select>
         </form>
 
-        <button id="confirm-playlist" >Create Playlist</button>
+        <input type="button" id="create-playlist" value="Enter the button" >
+
+        <h1 id="artist_id"></h1>
+
     </body>
 </html>

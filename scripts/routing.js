@@ -1,5 +1,4 @@
 
-
 $("#click").on("click", async function(){
     var link = await getAuthLink();
 	window.location.href = link;
@@ -123,29 +122,44 @@ document.getElementById("create-playlist").addEventListener("click", function(){
 
  async function getPlaylist(){
 
-	 const playlistInfo = document.getElementById("playlist-creation-info").elements;
-	 const artistInfo = document.getElementById("rules-creation").elements;
+	const playlistInfo = document.getElementById("playlist-creation-info").elements;
+	const artistInfo = document.getElementById("rules-creation").elements;
 
 	const nameArtist =  playlistInfo[0].value;
 	const nameDescription = playlistInfo[1].value;	
-	const nameVis = playlistInfo[2].value;	
+	let nameVis = playlistInfo[2].value;	
 
-	 const artistName = artistInfo[0].value;
-	 const filter = artistInfo[1].value;
+	if(nameVis === "true"){
+		nameVis = true;
+	}
+	else{
+		nameVis = false;
+	}
+
+	const playlist = {
+		name: nameArtist,
+		description: nameDescription,
+		public: nameVis
+	};
+
+	alert(playlist.name);
+
+	const artistName = artistInfo[0].value;
+	const filter = artistInfo[1].value;
 
 
-	let artistID = await getID(artistName, filter);
+	let artistID = await getArtistID(artistName, filter);
  
 	document.getElementById("artist_id").innerHTML = artistID;
-
+	await generatePlaylist(artistID, playlist);
 };
 
-async function getID(artist_name, type){
-	const artist = await getPlaylistInfo2(artist_name, type).then(res => {return res.artists[0].spotify_id});
+async function getArtistID(artist_name, type){
+	const artist = await filter(artist_name, type).then(res => {return res.artists[0].spotify_id});
 	return artist
 }
 
-async function getPlaylistInfo2(artist_name, type){
+async function filter(artist_name, type){
 	const response = await fetch("https://spotlist.patchyserver.xyz/api/search?types=" + type + "&query=" + artist_name + "&limit=1&offset=0",{
 		method: 'GET',
 		headers: {
@@ -157,4 +171,32 @@ async function getPlaylistInfo2(artist_name, type){
 		console.error('Error:',error);
 	})
 	return response.json();
+}
+
+async function createArtistPlaylist(artist_id, playlist_info){
+	const response = await fetch("https://spotlist.patchyserver.xyz/api/temp/from_artist?artist_id=" + artist_id,{
+		method: 'POST',
+		headers: {
+			'Accept': 'application/json',
+			'Content-type': 'application/json',
+			'user-id': getCookie("user_id"),
+			'token': getCookie("token")
+		},
+		body: 
+			JSON.stringify(playlist_info)
+		
+
+	}).catch((error)=>{
+		console.error('Error:',error);
+	});
+
+	return response.json();
+
+}
+
+async function generatePlaylist(artist_id, playlist){
+	const artist = await createArtistPlaylist(artist_id,playlist).then(res => {return res});
+	document.getElementById("playlist_link").href = artist;
+	document.getElementById("playlist_link").innerHTML = "Here is the playlist";
+	
 }

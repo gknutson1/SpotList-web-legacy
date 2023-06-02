@@ -145,11 +145,11 @@ document.getElementById("create-playlist").addEventListener("click", function(){
 
 	let artistID = await getArtistID(artistName, filter);
 
-	document.getElementById("loadStatus").innerHTML = "Please Hold While Playlist is Generating";
+	document.getElementById("playlist-status").innerHTML = "Please Hold While Playlist is Generating";
 
 	await generatePlaylist(artistID, playlist);
 
-	document.getElementById("loadStatus").innerHTML = "Playlist Created! Enjoy :)";
+	document.getElementById("playlist-status").innerHTML = "Playlist Created! Enjoy :)";
 
 
 };
@@ -190,7 +190,6 @@ async function createArtistPlaylist(artist_id, playlist_info){
 		console.error('Error:',error);
 	});
 
-	loadStatus = true;
 	return response.json();
 
 }

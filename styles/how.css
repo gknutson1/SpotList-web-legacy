@@ -47,7 +47,8 @@ a.active {
 
 
 .navbar{
-    position: absolute;
+    position: fixed;
+    top: 0;
     z-index: 10;
     display: flex;
     justify-content: space-between;
@@ -72,12 +73,12 @@ a.active {
 
 body{
     margin: 0;
-    position: bottom;
+    position: static;
     padding: 0;
+    z-index: 9;
     min-height: 90vh;
     background-color: #000000;
-    /* background-image: linear-gradient(80deg, rgb(82, 48, 124), rgb(18, 19, 18)); */
-    overflow: hidden;
+    overflow-y: scroll;
 }
 
 #up{
@@ -175,19 +176,21 @@ a.login {
 }
 
 .how-it-works {
-    position: fixed;
-    top: 35%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    position: absolute;
+    max-width: 500px;
+    top: 40%;
+    left: 45%;
+    transform: translate(-40%, -40%);
     margin: auto;
+    overflow-y: scroll;
     align-content: center;
     text-align: center;
 }
 
-
-ol.how-it-works {
+p.how-it-works {
     position: relative;
     margin: auto;
+    max-width: 500px;
     color: #FFFFFF;
     text-align: left;
     display: inline-block;
@@ -195,3 +198,12 @@ ol.how-it-works {
     font-family: "Inter", Arial, Helvetica, sans-serif;
 }
 
+ol.how-it-works {
+    position: relative;
+    line-height: 150%;
+    margin: auto;
+    color: #FFFFFF;
+    text-align: left;
+    font-size: medium;
+    font-family: "Inter", Arial, Helvetica, sans-serif;
+}

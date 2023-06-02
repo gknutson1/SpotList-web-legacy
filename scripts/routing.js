@@ -43,10 +43,10 @@ async function getCodeAndState(){
 	
 
 }
-var newURL;
+
 async function getTokenandID(){
-	newURL = "https://spotlist.patchyserver.xyz/api/exchange?code=" + code + "&state=" + state;
-	const response = await fetch(newURL,{
+
+	const response = await fetch("https://spotlist.patchyserver.xyz/api/exchange?code=" + code + "&state=" + state,{
 		method: 'GET',
 		headers: {
 			'Content-type': 'application/json',
@@ -82,14 +82,13 @@ async function getPlaylistInfo(){
 function displayUsername(){
 	document.getElementById("username").innerHTML = getCookie("displayName");
 
-
 }
+
 function flushCookies(){
 	
 	document.cookie = "displayName=; expires=Thu, 01 Jan 1970 00:00:01 GMT";
 	document.cookie = "token=; expires=Thu, 01 Jan 1970 00:00:01 GMT;"; 
 	document.cookie = "user_id=; expires=Thu, 01 Jan 1970 00:00:01 GMT;";
-
 
 }
 
@@ -117,8 +116,7 @@ function checkCookie(value){
 	}
 }
 
-document.getElementById("create-playlist").addEventListener("click", function(){
-	getPlaylist()});
+document.getElementById("create-playlist").addEventListener("click", function(){ getPlaylist()});
 
  async function getPlaylist(){
 
@@ -142,16 +140,18 @@ document.getElementById("create-playlist").addEventListener("click", function(){
 		public: nameVis
 	};
 
-	alert(playlist.name);
-
 	const artistName = artistInfo[0].value;
 	const filter = artistInfo[1].value;
 
-
 	let artistID = await getArtistID(artistName, filter);
- 
-	document.getElementById("artist_id").innerHTML = artistID;
+
+	document.getElementById("loadStatus").innerHTML = "Please Hold While Playlist is Generating";
+
 	await generatePlaylist(artistID, playlist);
+
+	document.getElementById("loadStatus").innerHTML = "Playlist Created! Enjoy :)";
+
+
 };
 
 async function getArtistID(artist_name, type){
@@ -190,13 +190,15 @@ async function createArtistPlaylist(artist_id, playlist_info){
 		console.error('Error:',error);
 	});
 
+	loadStatus = true;
 	return response.json();
 
 }
 
 async function generatePlaylist(artist_id, playlist){
+
 	const artist = await createArtistPlaylist(artist_id,playlist).then(res => {return res});
 	document.getElementById("playlist_link").href = artist;
-	document.getElementById("playlist_link").innerHTML = "Here is the playlist";
+	document.getElementById("playlist_link").innerHTML = playlist.name;
 	
 }

@@ -8,7 +8,7 @@ document.getElementById("add-rule-btn").addEventListener("click", function(){
 })
 
 document.getElementById("rule-one").childNodes[1].elements[1].addEventListener("change", function(e){
-    alert(e.target.value);
+    alert(e.target.label);
 
 
 })
@@ -16,19 +16,19 @@ document.getElementById("rule-one").childNodes[1].elements[1].addEventListener("
 function addRule(){
     const ruleTemp = document.getElementById("rule-one");
 
-    const copy = ruleTemp.cloneNode("true");
+    const newRule = ruleTemp.cloneNode("true");
+    newRule.childNodes[1].elements[0].options[1].disabled = false;
 
-    copy.childNodes[1].elements[1].addEventListener("change", function(e){
+    newRule.childNodes[1].elements[1].addEventListener("change", function(e){
         if(e.target.value.match(/^released./)){
-            copy.childNodes[1].elements[2].type ="date";
+            newRule.childNodes[1].elements[2].type ="date";
         }
         else{
-            copy.childNodes[1].elements[2].type ="text";
+            newRule.childNodes[1].elements[2].type ="text";
         }
     })
 
-
-    document.getElementById("rules-list").appendChild(copy);
+    document.getElementById("rules-list").appendChild(newRule);
 }
 
 function generateRule(){

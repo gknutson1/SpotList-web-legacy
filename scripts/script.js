@@ -7,30 +7,42 @@ document.getElementById("add-rule-btn").addEventListener("click", function(){
     addRule();
 })
 
-document.getElementById("rule-one").childNodes[1].elements[1].addEventListener("change", function(e){
-    alert(e.target.label);
-
-
-})
+applyChangeListener(document.getElementById("rule-one").childNodes[1].elements);
 
 function addRule(){
     const ruleTemp = document.getElementById("rule-one");
 
-    const newRule = ruleTemp.cloneNode("true");
-    newRule.childNodes[1].elements[0].options[1].disabled = false;
-
-    newRule.childNodes[1].elements[1].addEventListener("change", function(e){
-        if(e.target.value.match(/^released./)){
-            newRule.childNodes[1].elements[2].type ="date";
-        }
-        else{
-            newRule.childNodes[1].elements[2].type ="text";
-        }
-    })
+    let newRule = ruleTemp.cloneNode("true");
+    newRule = cleanClone(newRule);
 
     document.getElementById("rules-list").appendChild(newRule);
 }
 
+function applyChangeListener(ruleForm){
+    ruleForm[1].addEventListener("change", function(){
+        if(ruleForm[1].value.match(/^released./)){
+            ruleForm[2].type ="date";
+        }
+        else{
+            ruleForm[2].type ="text";
+        }
+    });
+}
+
 function generateRule(){
     
+}
+/*
+CleanClone() will clean clone of orignal first rule.
+*/
+function cleanClone(newRule){
+    const ruleForm = newRule.childNodes[1].elements;
+
+    ruleForm[0].options[1].disabled = false;
+
+    applyChangeListener(ruleForm);
+    ruleForm[1].options[1].selected = true;
+    ruleForm[2].type ="text";
+
+    return newRule;
 }

@@ -38,7 +38,7 @@ async function getCodeAndState(){
 
 	setIDandToken();
 	setTimeout(function(){
-		window.location.href = "/userview";
+		window.location.href = "/Debug";
 	}, 1000);
 	
 
@@ -123,27 +123,22 @@ document.getElementById("create-playlist").addEventListener("click", function(){
 	const playlistInfo = document.getElementById("playlist-creation-info").elements;
 	const artistInfo = document.getElementById("rules-creation").elements;
 
-	const nameArtist =  playlistInfo[0].value;
-	const nameDescription = playlistInfo[1].value;	
-	let nameVis = playlistInfo[2].value;	
-
-	if(nameVis === "true"){
-		nameVis = true;
+	let vis;
+	if(playlistInfo[2].value === "true"){
+		vis = true;
 	}
 	else{
-		nameVis = false;
+		vis = false;
 	}
 
 	const playlist = {
-		name: nameArtist,
-		description: nameDescription,
-		public: nameVis
+		name: playlistInfo[0].value,
+		description: playlistInfo[1].value,
+		public: vis
 	};
 
-	const artistName = artistInfo[0].value;
-	const filter = artistInfo[1].value;
 
-	let artistID = await getArtistID(artistName, filter);
+	let artistID = await getArtistID(artistInfo[0].value, artistInfo[1].value);
 
 	document.getElementById("playlist-status").innerHTML = "Please Hold While Playlist is Generating";
 
@@ -196,8 +191,8 @@ async function createArtistPlaylist(artist_id, playlist_info){
 
 async function generatePlaylist(artist_id, playlist){
 
-	const artist = await createArtistPlaylist(artist_id,playlist).then(res => {return res});
-	document.getElementById("playlist_link").href = artist;
+	const playlistLink = await createArtistPlaylist(artist_id,playlist).then(res => {return res});
+	document.getElementById("playlist_link").href = playlistLink;
 	document.getElementById("playlist_link").innerHTML = playlist.name;
 	
 }

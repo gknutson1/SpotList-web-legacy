@@ -40,6 +40,8 @@ function applyChangeListener(ruleForm){
         }
         else{
             ruleForm[2].type ="text";
+            ruleForm[2].value = "";
+
         }
     });
 }

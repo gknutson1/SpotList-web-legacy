@@ -12,6 +12,14 @@
 
         <h1>Create a Playlist Based on Currated Rules</h1>
         <form id="playlist-creation-info">
+            <br>
+
+            <label for="playlist-cover">Upload a new Photo</label>
+            <br>
+
+            <input type="file" value="Upload your cover">
+            <br>
+
             <label for="playlist-name">Please enter the name of your new playlsit</label>
             <br>
             <input type="text" id="playlist-name">
@@ -32,29 +40,47 @@
              <label for="false">Private</label>
          </div>
 
-        </form>
-        <form id="rules-creation">
-            <label for="filter-id">Please enter your search term</label>
-            <br>
-            <input type="text" id="filter-id">
-            <br>
-            <label for="filter-choice">Please select your filter</label>
-            <br>
-            <select id="filter-choice">
-                <option value="album">Album</option>
-                <option value="artist" selected>Artist</option>
-                <option value="playlist">Artist</option>
-                <option value="track">Track</option>
-                <option value="show">Show</option>
-                <option value="episode">Episode</option>
-                <option value="audiobook">AudioBook</option>
-            </select>
-        </form>
 
-        <button type="button" id="create-playlist" >Generate Playlist</button>
+
+        </form>
+        <h1>Rules: </h1>
+        <section id="rules-list">
+        <div class="rule" id="rule-one">
+        <form id="rules-creation">
+        
+            <select class="playlist-operation">
+                <option value="add" selected> Add</option>
+                <option value="remove" disabled>Remove</option>
+            </select>
+            <br>
+             <label for="filter-choice">Please select your filter</label>
+            <br>
+            <select classs="filter-choice">
+                <option value="album">on Album</option>
+                <option value="playlist" selected> on Playlist</option>
+                <option value="artist">By Artist</option>
+                <option value="featureArtist">Featuring Artist</option>
+                <option value="releasedBefore">Released Before</option>
+                <option value="releasedAfter">Released After</option>
+                <option value="track">Titled</option>
+                <option value="regex">Matching Regex</option>
+            </select>
+            
+            <br>
+            <label for="search-op">Please enter your search term</label>
+            <br>
+            <input type="text" class="search" name="search-op" required>
+            <br>
+            <button type="button">Save Rule</button>
+        </form>
+    </div>
+
+</section>
+<button type="button"id="add-rule-btn">Add New Rule</button>
+
+        <button type="button"id="create-playlist">Create Playlist</button>
 
         <h1 id="playlist-status"></h1>
-        <img src="Images/loading.gif" id="loading-animation" alt="gif of ripple effect shifting from green to black" height="100px" width="100px" hidden>
         <a id="playlist_link"></a>
 
     </body>

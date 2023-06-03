@@ -141,11 +141,11 @@ document.getElementById("create-playlist").addEventListener("click", function(){
 	let artistID = await getArtistID(artistInfo[0].value, artistInfo[1].value);
 
 	document.getElementById("playlist-status").innerHTML = "Please Hold While Playlist is Generating";
-
+	document.getElementById("loading-animation").removeAttribute("hidden");
 	await generatePlaylist(artistID, playlist);
 
 	document.getElementById("playlist-status").innerHTML = "Playlist Created! Enjoy :)";
-
+	document.getElementById("loading-animation").setAttribute("hidden", "hidden");
 
 };
 

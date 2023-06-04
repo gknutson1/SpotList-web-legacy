@@ -1,5 +1,5 @@
 .rule{
-    width: 80%;
+    width: 70%;
     margin: auto;
 }
 
@@ -15,8 +15,13 @@
 }
 
 input[name="search-op"]{
-    width: 350px;
+    width: 300px;
 }
 .filter-choice{
     width: 200px;
+}
+
+#add-rule-btn{
+    cursor: pointer;
+    font-weight: 600;
 }

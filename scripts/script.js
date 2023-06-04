@@ -7,7 +7,6 @@ document.getElementById("add-rule-btn").addEventListener("click", addRule);
 //document.getElementById("add-rule-btn").addEventListener("click", checkRuleOneSave);
 
 applyListeners(document.getElementById("rule-one").childNodes[1].elements);
-
 function addRule(){
     const ruleTemp = document.getElementById("rule-one");
 
@@ -45,6 +44,7 @@ function applyListeners(ruleForm){
         ruleForm[4].disabled = true;
 
     });
+
 }
 
 function generateRule(){
@@ -55,12 +55,19 @@ CleanClone() will clean clone of orignal first rule.
 */
 function cleanClone(newRule){
     const ruleForm = newRule.childNodes[1].elements;
-
+    applyDeleteFilter(newRule);
     ruleForm[0].options[1].disabled = false;
     applyListeners(ruleForm);
     ruleForm[1].options[1].selected = true;
     ruleForm[2].type ="text";
     ruleForm[2].value = "";
     ruleForm[5].disabled = false;
+
     return newRule;
+}
+
+function applyDeleteFilter(rule){
+    rule.childNodes[1].elements[5].addEventListener("click",function(){
+        rule.remove();
+    })
 }

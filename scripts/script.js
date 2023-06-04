@@ -13,9 +13,9 @@ function addRule() {
 
     let newRule = ruleTemp.cloneNode("true");
     newRule = cleanClone(newRule);
-
-    document.getElementById("rules-list").insertBefore(newRule, document.getElementById("add-rule-btn"));
     
+    document.getElementById("rules-list").insertBefore(newRule, document.getElementById("add-rule-btn"));
+    newRule.scrollIntoView();
 }
 
 function applyListeners(rule) {

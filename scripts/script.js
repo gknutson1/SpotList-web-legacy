@@ -66,11 +66,19 @@ function cleanClone(newRule) {
     const ruleForm = newRule.childNodes[1].elements;
     applyDeleteFilter(newRule);
     ruleForm[0].options[1].disabled = false;
+    newRule.removeAttribute("id");
     applyListeners(newRule);
     ruleForm[1].options[1].selected = true;
     ruleForm[2].type = "text";
     ruleForm[2].value = "";
     ruleForm[5].disabled = false;
+    ruleForm[0].disabled = false;
+    ruleForm[1].disabled = false;
+    ruleForm[2].disabled = false;
+
+    ruleForm[3].disabled = false;
+    ruleForm[4].disabled = false;
+
     newRule.childNodes[1].style.borderColor = "black";
 
     return newRule;

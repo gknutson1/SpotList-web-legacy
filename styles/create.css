@@ -25,3 +25,7 @@ input[name="search-op"]{
     cursor: pointer;
     font-weight: 600;
 }
+
+.search-btn{
+    display: none;
+}

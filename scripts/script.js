@@ -1,3 +1,4 @@
+
 document.getElementById("home-button").addEventListener("click", function () {
     window.location = "/index";
 });
@@ -33,6 +34,15 @@ function applyListeners(rule) {
 
         }
     });
+
+    ruleForm[2].addEventListener("keypress", async function(e){
+        if(e.key === "Enter"){
+            e.preventDefault();
+            const rule =  await search(ruleForm[2].value, ruleForm[1].value);
+            console.log(rule);
+        }
+    })
+
     ruleForm[3].addEventListener("click", function () {
         ruleForm[0].disabled = true;
         ruleForm[1].disabled = true;
@@ -77,7 +87,7 @@ function cleanClone(newRule) {
     ruleForm[2].disabled = false;
 
     ruleForm[3].disabled = false;
-    ruleForm[4].disabled = false;
+    ruleForm[4].disabled = true;
 
     newRule.childNodes[1].style.borderColor = "black";
 
@@ -88,4 +98,18 @@ function applyDeleteFilter(rule) {
     rule.childNodes[1].elements[5].addEventListener("click", function () {
         rule.remove();
     })
+}
+
+async function search(searchTerm, type){
+	const response = await fetch("https://spotlist.patchyserver.xyz/api/search?types=" + type + "&query=" + searchTerm + "&limit=20&offset=0",{
+		method: 'GET',
+		headers: {
+			'Accept': 'application/json',
+			'user-id': getCookie("user_id"),
+			'token': getCookie("token")
+		}
+	}).catch((error)=>{
+		console.error('Error:',error);
+	})
+	return response.json();
 }

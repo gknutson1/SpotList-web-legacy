@@ -168,6 +168,7 @@ async function filter(artist_name, type){
 	return response.json();
 }
 
+
 async function createArtistPlaylist(artist_id, playlist_info){
 	const response = await fetch("https://spotlist.patchyserver.xyz/api/temp/from_artist?artist_id=" + artist_id,{
 		method: 'POST',

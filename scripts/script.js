@@ -191,21 +191,26 @@ function addPlaylistToSearchResults(form, playlist){
     else{
     cover.src = playlist.image;
     }
-    cover.style.height = "100px";
-    cover.style.width = "100px";
+    cover.classList.add("searchIMG", "searchElement");
 
     const name = document.createElement("a");
     name.innerHTML = playlist.name;
     name.href = playlist.url;
     name.target = "_blank";
+    name.classList.add("searchName", "searchElement");
 
     const id = document.createElement("p")
     id.textContent = "Spotify id: "+ playlist.id;
     const total_tracks = document.createElement("p")
     total_tracks.textContent = "Total Tracks: " + playlist.total_tracks;
+    total_tracks.classList.add("searchTotalTracks", "searchElement");
+
+
+    id.classList.add("searchID", "searchElement");
+
 
     const selectBtn = document.createElement("button");
-    selectBtn.classList.add("selectBtn");
+    selectBtn.classList.add("selectBtn", "searchElement");
     selectBtn.textContent = "+";
 
     selectBtn.addEventListener("click", function(){
@@ -233,8 +238,6 @@ function addArtistToSearchResults(form, artist){
     else{
         cover.src = artist.image;
     }
-    cover.style.height = "100px";
-    cover.style.width = "100px";
 
 
     const name = document.createElement("a");

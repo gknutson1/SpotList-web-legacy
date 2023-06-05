@@ -1,3 +1,264 @@
-document.getElementById("home-button").addEventListener("click", function(){
+
+document.getElementById("home-button").addEventListener("click", function () {
     window.location = "/index";
 });
+
+
+document.getElementById("add-rule-btn").addEventListener("click", addRule);
+//document.getElementById("add-rule-btn").addEventListener("click", checkRuleOneSave);
+
+applyListeners(document.getElementById("rule-one"));
+
+function addRule() {
+    const ruleTemp = document.getElementById("rule-one");
+
+    let newRule = ruleTemp.cloneNode("true");
+    newRule = cleanClone(newRule);
+    
+    document.getElementById("rules-list").insertBefore(newRule, document.getElementById("add-rule-btn"));
+    newRule.scrollIntoView();
+}
+
+function applyListeners(rule) {
+
+    const ruleForm = rule.childNodes[1].elements;
+
+    ruleForm[1].addEventListener("change", function () {
+        if (ruleForm[1].value.match(/^released./)) {
+            ruleForm[2].type = "date";
+            ruleForm[2].value = "2016-10-13";
+        }
+        else {
+            ruleForm[2].type = "text";
+            ruleForm[2].value = "";
+
+        }
+    });
+
+    ruleForm[2].addEventListener("keypress", async function(e){
+        if(e.key === "Enter"){
+            e.preventDefault();
+
+            const searchResults =  await search(ruleForm[2].value, ruleForm[1].value);
+            displayResults(ruleForm,searchResults);
+            document.getElementById("search-results").style.display = "block"
+
+        }
+    })
+
+    ruleForm[3].addEventListener("click", function () {
+        ruleForm[0].disabled = true;
+        ruleForm[1].disabled = true;
+        ruleForm[2].disabled = true;
+        ruleForm[3].disabled = true;
+        ruleForm[4].disabled = false;
+        rule.childNodes[1].style.borderColor = "green";
+
+
+    });
+    ruleForm[4].addEventListener("click", function () {
+        ruleForm[0].disabled = false;
+        ruleForm[1].disabled = false;
+        ruleForm[2].disabled = false;
+        ruleForm[3].disabled = false;
+        ruleForm[4].disabled = true;
+        rule.childNodes[1].style.borderColor = "blue";
+
+
+    });
+
+}
+
+function generateRule() {
+
+}
+/*
+CleanClone() will clean clone of orignal first rule.
+*/
+function cleanClone(newRule) {
+    const ruleForm = newRule.childNodes[1].elements;
+    applyDeleteFilter(newRule);
+    ruleForm[0].options[1].disabled = false;
+    newRule.removeAttribute("id");
+    applyListeners(newRule);
+    ruleForm[1].options[1].selected = true;
+    ruleForm[2].type = "text";
+    ruleForm[2].value = "";
+    ruleForm[5].disabled = false;
+    ruleForm[0].disabled = false;
+    ruleForm[1].disabled = false;
+    ruleForm[2].disabled = false;
+
+    ruleForm[3].disabled = false;
+    ruleForm[4].disabled = true;
+
+    newRule.childNodes[1].style.borderColor = "black";
+
+    return newRule;
+}
+
+function applyDeleteFilter(rule) {
+    rule.childNodes[1].elements[5].addEventListener("click", function () {
+        rule.remove();
+    })
+}
+
+async function search(searchTerm, type){
+	const response = await fetch("https://spotlist.patchyserver.xyz/api/search?types=" + type + "&query=" + searchTerm + "&limit=20&offset=0",{
+		method: 'GET',
+		headers: {
+			'Accept': 'application/json',
+			'user-id': getCookie("user_id"),
+			'token': getCookie("token")
+		}
+	}).catch((error)=>{
+		console.error('Error:',error);
+	})
+	return response.json();
+}
+
+var modal = document.getElementById("search-results");
+
+var span = document.getElementsByClassName("close")[0];
+
+
+
+span.onclick = function() {
+  modal.style.display = "none";
+}
+
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
+
+function displayResults(form, resultsJson){
+   document.getElementById("results").innerHTML = "";
+
+    if(form[1].value === "artist"){
+        displayArtists(form, resultsJson.artists);
+    }
+    if(form[1].value === "playlist"){
+        displayPlaylists(form,resultsJson.playlists);
+    }
+}
+
+
+
+function displayArtists(form, artistJson){
+    for(i = 0; i < artistJson.length; i++){
+
+        const artist = {
+            image: artistJson[i].images[0],
+            name: artistJson[i].name,
+            url: artistJson[i].spotify_url,
+            id: artistJson[i].spotify_id,
+            followers: artistJson[i].followers
+        }
+
+        addArtistToSearchResults(form,artist);
+
+    }
+}
+
+function displayPlaylists(form,playlistJson){
+    for(i = 0; i < playlistJson.length; i++){
+
+        const playlist = {
+            image: playlistJson[i].images[0],
+            name: playlistJson[i].name,
+            url: playlistJson[i].spotify_url,
+            id: playlistJson[i].spotify_id,
+            total_tracks: playlistJson[i].total_tracks
+        }
+
+        addPlaylistToSearchResults(form, playlist);
+
+    }
+}
+
+function addPlaylistToSearchResults(form, playlist){
+    const searchResults = document.getElementById("results");
+
+    const result = document.createElement("div");
+    result.classList.add("result");
+
+    const cover = document.createElement("img");
+    if(playlist.image == "undefined"){
+        cover.src = "images/undefined-img.jpeg"   
+    }
+    else{
+    cover.src = playlist.image;
+    }
+    cover.style.height = "100px";
+    cover.style.width = "100px";
+
+    const name = document.createElement("a");
+    name.innerHTML = playlist.name;
+    name.href = playlist.url;
+    name.target = "_blank";
+
+    const id = document.createElement("p")
+    id.textContent = "Spotify id: "+ playlist.id;
+    const total_tracks = document.createElement("p")
+    total_tracks.textContent = "Total Tracks: " + playlist.total_tracks;
+
+    const selectBtn = document.createElement("button");
+    selectBtn.classList.add("selectBtn");
+    selectBtn.textContent = "+";
+
+    selectBtn.addEventListener("click", function(){
+        form[2].value = playlist.name;
+        modal.style.display = "none";
+
+    });
+
+    result.append(cover,name,total_tracks, id, selectBtn);
+
+    searchResults.append(result);
+    
+}
+
+function addArtistToSearchResults(form, artist){
+    const searchResults = document.getElementById("results");
+
+    const result = document.createElement("div");
+    result.classList.add("result");
+
+    const cover = document.createElement("img");
+    if(artist.image == "undefined"){
+        cover.src = "images/undefined-img.jpeg"   
+    }
+    else{
+        cover.src = artist.image;
+    }
+    cover.style.height = "100px";
+    cover.style.width = "100px";
+
+
+    const name = document.createElement("a");
+    name.innerHTML = artist.name;
+    name.href = artist.url;
+    name.target = "_blank";
+    const id = document.createElement("p")
+    id.textContent = "Spotify id: "+ artist.id;
+    const followers = document.createElement("p");
+    followers.textContent = "Followers: " + artist.followers;
+
+    const selectBtn = document.createElement("button");
+    selectBtn.classList.add("selectBtn");
+    selectBtn.textContent = "+";
+
+    selectBtn.addEventListener("click", function(){
+        form[2].value = artist.name;
+        modal.style.display = "none";
+
+    });
+
+
+    result.append(cover,name,followers, id, selectBtn);
+
+    searchResults.append(result);
+    
+}

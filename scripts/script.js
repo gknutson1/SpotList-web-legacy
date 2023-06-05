@@ -92,7 +92,7 @@ function cleanClone(newRule) {
     ruleForm[3].disabled = false;
     ruleForm[4].disabled = true;
 
-    newRule.childNodes[1].style.borderColor = "black";
+    newRule.childNodes[1].style.borderColor = "";
 
     return newRule;
 }

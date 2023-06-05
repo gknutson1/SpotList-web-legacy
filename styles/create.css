@@ -213,6 +213,7 @@ input[name="search-op"]{
     height: 40px;
     align-items: center;
     align-content: center;
+    margin: 0;
 }
 
 .search {

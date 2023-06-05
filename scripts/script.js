@@ -184,42 +184,13 @@ function addPlaylistToSearchResults(form, playlist){
     const result = document.createElement("div");
     result.classList.add("result");
 
-    const cover = document.createElement("img");
-    if(playlist.image == "undefined"){
-        cover.src = "images/undefined-img.jpeg"   
-    }
-    else{
-    cover.src = playlist.image;
-    }
-    cover.classList.add("searchIMG", "searchElement");
+    const cover = createCoverImg(playlist);
+    const mainName = createMainName(playlist);
+    const id = createSpotifyID(playlist);
+    const total_tracks = createTotalTracks(playlist);
+    const selectBtn = createSelectBtn(form, playlist);
 
-    const name = document.createElement("a");
-    name.innerHTML = playlist.name;
-    name.href = playlist.url;
-    name.target = "_blank";
-    name.classList.add("searchName", "searchElement");
-
-    const id = document.createElement("p")
-    id.textContent = "Spotify id: "+ playlist.id;
-    const total_tracks = document.createElement("p")
-    total_tracks.textContent = "Total Tracks: " + playlist.total_tracks;
-    total_tracks.classList.add("searchTotalTracks", "searchElement");
-
-
-    id.classList.add("searchID", "searchElement");
-
-
-    const selectBtn = document.createElement("button");
-    selectBtn.classList.add("selectBtn", "searchElement");
-    selectBtn.textContent = "+";
-
-    selectBtn.addEventListener("click", function(){
-        form[2].value = playlist.name;
-        modal.style.display = "none";
-
-    });
-
-    result.append(cover,name,total_tracks, id, selectBtn);
+    result.append(cover,mainName,total_tracks, id, selectBtn);
 
     searchResults.append(result);
     
@@ -231,37 +202,73 @@ function addArtistToSearchResults(form, artist){
     const result = document.createElement("div");
     result.classList.add("result");
 
-    const cover = document.createElement("img");
-    if(artist.image == "undefined"){
-        cover.src = "images/undefined-img.jpeg"   
+    const cover = createCoverImg(artist);
+    const mainName = createMainName(artist);
+    const id = createSpotifyID(artist);
+    const followers = createFollowers(artist);
+    const selectBtn = createSelectBtn(form, artist);
+
+    result.append(cover,mainName,followers, id, selectBtn);
+
+    searchResults.append(result);
+    
+}
+
+function createSpotifyID(json){
+   const id = document.createElement("p")
+    id.textContent = "Spotify id: "+ json.id;
+    id.classList.add("searchID", "searchElement");
+    return id;
+}
+
+function createCoverImg(json){
+    const img = document.createElement("img");
+    if(json.image == "undefined"){
+        img.src = "images/undefined-img.jpeg"   
     }
     else{
-        cover.src = artist.image;
+    img.src = json.image;
     }
+    img.classList.add("searchIMG", "searchElement");
 
+    return img;
+}
 
+function createMainName(json){
     const name = document.createElement("a");
-    name.innerHTML = artist.name;
-    name.href = artist.url;
+    name.innerHTML = json.name;
+    name.href = json.url;
     name.target = "_blank";
-    const id = document.createElement("p")
-    id.textContent = "Spotify id: "+ artist.id;
-    const followers = document.createElement("p");
-    followers.textContent = "Followers: " + artist.followers;
+    name.classList.add("searchName", "searchElement");
 
+    return name;
+}
+
+function createSelectBtn(form, json){
     const selectBtn = document.createElement("button");
-    selectBtn.classList.add("selectBtn");
+    selectBtn.classList.add("selectBtn", "searchElement");
     selectBtn.textContent = "+";
 
     selectBtn.addEventListener("click", function(){
-        form[2].value = artist.name;
+        form[2].value = json.name;
         modal.style.display = "none";
 
     });
 
+    return selectBtn;
+}
 
-    result.append(cover,name,followers, id, selectBtn);
+function createTotalTracks(json){
+    const total_tracks = document.createElement("p");
+    total_tracks.textContent = "Total Tracks: " + json.total_tracks;
+    total_tracks.classList.add("searchTotalTracks", "searchElement");
+    return total_tracks;
+}
 
-    searchResults.append(result);
-    
+function createFollowers(json){
+    const followers = document.createElement("p");
+    followers.textContent = "Followers: " + json.followers;
+    followers.classList.add("searchFollowers", "searchElement");
+
+    return followers;
 }

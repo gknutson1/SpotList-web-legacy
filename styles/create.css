@@ -187,17 +187,7 @@ input[type="radio"] {
   font-size: medium;
   font-family: "Inter", Arial, Helvetica, sans-serif;
   margin-left: 20%;
-  margin-top: 0.5em;
-  appearance: none;
-  background-color: #000000;
-  accent-color: #FFFFFF;
-  width: 1.15em;
-  height: 1.15em;
-  border: 0.15em solid white;
-  border-radius: 50%;
-  line-height: 1.1em;
-  transform: translateY(-0.075em);
-  
+  margin-top: 0.5em;  
 }
 
 
@@ -227,15 +217,14 @@ input[name="search-op"]{
 
 .search {
   margin-left: 20%;
-  margin-top: 0.5em;
-  margin-bottom: 1em;
+  /* margin-bottom: 1em; */
   color: #FFFFFF;
   font-size: medium;
   font-family: "Inter", Arial, Helvetica, sans-serif;
   display: inline-block;
   border: 1px solid white;
   background-color: #000000;
-  padding: 6px 12px;
+  /* padding: 6px 12px; */
 }
 
 

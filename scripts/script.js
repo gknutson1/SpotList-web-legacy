@@ -142,8 +142,13 @@ function displayResults(form, resultsJson){
     if(form[1].value === "playlist"){
         displayPlaylists(form,resultsJson.playlists);
     }
+    if(form[1].value === "album"){
+        displayAlbums(form, resultsJson.albums);
+    }
+    if(form[1].value == "track"){
+        displayTracks(form, resultsJson.tracks);
+    }
 }
-
 
 
 function displayArtists(form, artistJson){
@@ -174,6 +179,38 @@ function displayPlaylists(form,playlistJson){
         }
 
         addPlaylistToSearchResults(form, playlist);
+
+    }
+}
+
+function displayTracks(form, trackJson){
+    for(i = 0; i < trackJson.length; i++){
+
+        const track = {
+            image: trackJson[i].album.images[0],
+            name: trackJson[i].name,
+            url: trackJson[i].spotify_url,
+            id: trackJson[i].spotify_id,
+            artistName: trackJson[i].artists[0].display_name
+        }
+
+        addTrackToSearchResults(form, track);
+
+    }
+}
+
+function displayAlbums(form, albumJson){
+    for(i = 0; i < albumJson.length; i++){
+
+        const album = {
+            image: albumJson[i].images[0],
+            name: albumJson[i].name,
+            url: albumJson[i].spotify_url,
+            id: albumJson[i].spotify_id,
+            total_tracks: albumJson[i].total_tracks
+        }
+
+        addAlbumToSearchResults(form, album);
 
     }
 }
@@ -213,6 +250,43 @@ function addArtistToSearchResults(form, artist){
     searchResults.append(result);
     
 }
+
+function addAlbumToSearchResults(form, album){
+    const searchResults = document.getElementById("results");
+
+    const result = document.createElement("div");
+    result.classList.add("result");
+
+    const cover = createCoverImg(album);
+    const mainName = createMainName(album);
+    const id = createSpotifyID(album);
+    const total_tracks = createTotalTracks(album);
+    const selectBtn = createSelectBtn(form, album);
+
+    result.append(cover,mainName,total_tracks, id, selectBtn);
+
+    searchResults.append(result);
+    
+}
+
+function addTrackToSearchResults(form, track){
+    const searchResults = document.getElementById("results");
+
+    const result = document.createElement("div");
+    result.classList.add("result");
+
+    const cover = createCoverImg(track);
+    const mainName = createMainName(track);
+    const id = createSpotifyID(track);
+    const artistName = createArtistName(track);
+    const selectBtn = createSelectBtn(form, track);
+
+    result.append(cover,mainName,artistName, id, selectBtn);
+
+    searchResults.append(result);
+    
+}
+
 
 function createSpotifyID(json){
    const id = document.createElement("p")
@@ -271,4 +345,12 @@ function createFollowers(json){
     followers.classList.add("searchFollowers", "searchElement");
 
     return followers;
+}
+
+function createArtistName(json){
+    const artistName = document.createElement("p");
+    artistName.textContent = "Artist Name: " + json.artistName;
+    artistName.classList.add("searchFollowers", "searchElement");
+
+    return artistName;
 }

@@ -301,3 +301,10 @@ button[class="button-op"]:disabled {
   background-color: #000000;
   padding: 6px 12px;
 }
+
+#playlist_link {
+  color: #1DB954;
+  font-size: x-large;
+  font-family: "Inter", Arial, Helvetica, sans-serif;
+  text-decoration: none;
+}

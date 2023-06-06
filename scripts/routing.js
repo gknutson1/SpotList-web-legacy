@@ -38,7 +38,7 @@ async function getCodeAndState() {
 
 	setIDandToken();
 	setTimeout(function () {
-		window.location.href = "/Debug";
+		window.location.href = "/Create";
 	}, 1000);
 
 

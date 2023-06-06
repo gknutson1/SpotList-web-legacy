@@ -381,7 +381,7 @@ async function generatePlaylist(){
     const rules = collectRules();
 
     await applyRules(playlist_id.playlist_id, rules);
-    await buildPlaylsit(playlist_id.playlist_id);
+    await buildPlaylist(playlist_id.playlist_id);
 }
 
 function collectRules(){
@@ -459,7 +459,7 @@ async function applyRules(p_id, rules){
     });
 }
 
-async function buildPlaylsit(p_id){
+async function buildPlaylist(p_id){
     await fetch("https://spotlist.patchyserver.xyz/api/build/" + p_id, {
         method: 'PUT',
 		headers: {

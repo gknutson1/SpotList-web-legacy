@@ -22,7 +22,11 @@
         <div class="navlinks">
         <a class="link" href="how.html">How It Works</a>
         &nbsp;&nbsp;&nbsp;&nbsp;
-        <a class="link" href="/Debug">Sign In</a>
+        <a id="username"class ="link"><script>
+            window.addEventListener("load", (event) => {
+              displayUsername()});
+             // getPlaylistInfo();
+            </script></a>
         </div>
     </div>
 
@@ -31,7 +35,7 @@
         <br>
         <br>
         <div class="login-button">
-            <a class="login" href="/Debug">Log in with Spotify</a>
+            <a class="login" id="click">Log in with Spotify</a>
         </div>
     </div> 
     </nav>

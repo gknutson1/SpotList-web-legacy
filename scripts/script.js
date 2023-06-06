@@ -324,7 +324,7 @@ function createSelectBtn(form, json) {
     selectBtn.textContent = "+";
 
     selectBtn.addEventListener("click", function () {
-        form[2].value = json.name;
+        form[2].value = json.name + " (" + json.id + ")";
         modal.style.display = "none";
 
     });
@@ -353,4 +353,115 @@ function createArtistName(json) {
     artistName.classList.add("searchFollowers", "searchElement");
 
     return artistName;
+}
+
+document.getElementById("generate-playlist").addEventListener("click", generatePlaylist);
+
+
+async function generatePlaylist(){
+    const form = document.getElementById("playlist-creation-info");
+
+	let vis;
+	if (form.elements[2].value === "true") {
+		vis = true;
+	}
+	else {
+		vis = false;
+	}
+
+    const playlistInfo = {
+        name: form.elements[0].value,
+        public: vis,
+        description: form.elements[1].value,
+
+    }
+
+    const playlist_id = await createBlankPlaylist(playlistInfo);
+
+    const rules = collectRules();
+
+    await applyRules(playlist_id, rules);
+    await buildPlaylsit(playlist_id);
+}
+
+function collectRules(){
+    const rulesList = document.getElementsByClassName("rule");
+    const rulesFormatted = [];
+
+    for(i = 0; i < rulesList.length - 1; i++){
+
+        let data = rulesList[i].childNodes[1].elements[2].value;
+        data = data.substring(
+            data.indexOf('(') + 1,
+            data.indexOf(')'));
+
+        let is_add;
+
+        if(rulesList[i].childNodes[1].elements[0] == "add"){
+            is_add = true;
+        }
+        else{
+            is_add = false;
+        }
+
+        const ruleFormatted = {
+            type: rulesList[i].childNodes[1].elements[1].value,
+            data: data,
+            is_add: is_add
+        }
+
+        rulesFormatted.push(ruleFormatted);
+
+    }
+
+    return rulesFormatted;
+
+}
+
+async function createBlankPlaylist(playlist_info){
+    const response = await fetch("https://spotlist.patchyserver.xyz/api/playlist",{
+		method: 'POST',
+		headers: {
+			'Accept': 'application/json',
+			'Content-type': 'application/json',
+			'user-id': getCookie("user_id"),
+			'token': getCookie("token")
+		},
+		body:
+			JSON.stringify(playlist_info)
+
+
+	}).catch((error) => {
+		console.error('Error:', error);
+	});
+
+	return response.json();
+}
+
+async function applyRules(p_id, rules){
+    await fetch("https://spotlist.patchyserver.xyz/api/playlist/" + p_id + "/rules", {
+        method: 'PUT',
+		headers: {
+			'Accept': '*/*',
+			'Content-type': 'application/json',
+			'user-id': getCookie("user_id"),
+			'token': getCookie("token")
+		},
+		body:
+			JSON.stringify(rules)
+    });
+}
+
+async function buildPlaylsit(p_id){
+    await fetch("https://spotlist.patchyserver.xyz/api/build/" + p_id, {
+        method: 'PUT',
+		headers: {
+			'Accept': 'application/json',
+			'user-id': getCookie("user_id"),
+			'token': getCookie("token")
+		},
+		body:
+			JSON.stringify(rules)
+    });
+}
 }

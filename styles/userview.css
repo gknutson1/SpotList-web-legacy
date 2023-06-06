@@ -1,28 +1,75 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
 body{
-    background-image: linear-gradient(to bottom, #587c5a, #4c724e, #416843, #355f37, #2a552c);
-    font-family: poppins;
-    color: #c8e6cd;
+    margin: 0;
+    position: static;
+    padding: 0;
+    min-height: 90vh;
+    background-color: #000000;
+    background-image: linear-gradient(70deg, rgba(82, 48, 124, 0.4), rgb(0, 0, 0), rgba(29, 185, 84, 0.6) );
+    overflow-y: scroll;
+}
+
+
+a.logo {
+    color: #1DB954;
+    padding-left: 5%;
+    font-size: x-large;
+    font-family: "Inter", Arial, Helvetica, sans-serif;
+    text-decoration: none;
+}
+
+.navbar {
+    position: fixed;
+    top: 0;
+    z-index: 10;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #000000;
+    height: 60px;
+    width: 100%;
+    margin: 0px auto;
+    padding: 0px;
+}
+
+.navlinks {
+    padding-right: 40px;
+    align-items: center;
+    align-content: flex-end;
+    justify-content: center, space-between;
+
 }
 
 h1{
     margin: 10px 0 10px;
+    color: #FFFFFF;
+    font-size: x-large;
+    font-family: "Inter", Arial, Helvetica, sans-serif;
     
 }
 h2{
     font-size: 17px;
     margin: 0;
     font-weight: 400;
+    color: #FFFFFF;
+    font-size: large;
+    font-family: "Inter", Arial, Helvetica, sans-serif;
 }
 h3{
     font-size: 15px;
     font-weight: 400;
+    color: #FFFFFF;
+    font-size: medium;
+    font-family: "Inter", Arial, Helvetica, sans-serif;
 
     margin: 0;
 }
 h4{
     font-weight: 400;
-
+    color: #FFFFFF;
+    font-size: medium;
+    font-family: "Inter", Arial, Helvetica, sans-serif;
     margin: 0;
 }
 
@@ -38,6 +85,9 @@ th{
     border-bottom: solid thin; 
     font-weight: 500;
 
+    color: #FFFFFF;
+    font-size: medium;
+    font-family: "Inter", Arial, Helvetica, sans-serif;
 }
 
 li{
@@ -47,6 +97,9 @@ li{
     width: 100%;
     height: 30px;
    
+    color: #FFFFFF;
+    font-size: small;
+    font-family: "Inter", Arial, Helvetica, sans-serif;
 
 }
 
@@ -61,6 +114,9 @@ table{
     margin: 1em 0 1em;
     width: 100%;
     border-collapse: collapse;
+    color: #FFFFFF;
+    font-size: medium;
+    font-family: "Inter", Arial, Helvetica, sans-serif;
 }
 
 #press{
@@ -78,10 +134,11 @@ table{
 }
 
 button{
-    font-family: poppins;
-    background-color: #c8e6cd;
-    border-color: #7c9c82;
-    color: #58755d;
-    border-radius: 3px;
-
+    color: #1DB954;
+    font-size: medium;
+    font-family: "Inter", Arial, Helvetica, sans-serif;
+    display: inline-block;
+    border: 1px solid #1DB954;
+    background-color: #000000;
+    padding: 6px 12px;
 }

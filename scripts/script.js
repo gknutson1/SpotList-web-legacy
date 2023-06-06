@@ -380,8 +380,16 @@ async function generatePlaylist(){
 
     const rules = collectRules();
 
+    document.getElementById("playlist-status").innerHTML = "Please Hold While Playlist is Generating";
+	document.getElementById("loading-animation").removeAttribute("hidden");
+
     await applyRules(playlist_id.playlist_id, rules);
     await buildPlaylist(playlist_id.playlist_id);
+    document.getElementById("playlist-link").href= playlist_id.url;
+    document.getElementById("playlist-link").innerHTML = form.elements[0].value;
+	document.getElementById("playlist-status").innerHTML = "Playlist Created! Enjoy :)";
+	document.getElementById("loading-animation").setAttribute("hidden", "hidden");
+
 }
 
 function collectRules(){

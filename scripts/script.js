@@ -412,9 +412,7 @@ function collectRules(){
         if(type === "artist"){
             type = "Artist"
         }
-        if(type === "album"){
-            type = "Album"
-        }
+  
         if(rulesList[i].childNodes[1].elements[0] == "add"){
             is_add = true;
         }

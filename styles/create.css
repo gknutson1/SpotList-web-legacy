@@ -11,6 +11,12 @@ a.logo {
   text-decoration: none;
 }
 
+a.link {
+    color: #1DB954;
+    font-size: medium;
+    font-family: "Inter", Arial, Helvetica, sans-serif;
+}
+
 .navbar {
   position: fixed;
   top: 0;
@@ -26,10 +32,12 @@ a.logo {
 }
 
 .navlinks {
+  display: flex;
   padding-right: 40px;
   align-items: center;
   align-content: flex-end;
   justify-content: center, space-between;
+  gap: 1em;
 
 }
 
@@ -267,7 +275,7 @@ input[name="search-op"] {
 
 }
 
-button[id="create-playlist"] {
+button[id="generate-playlist"] {
   margin-left: 20%;
   margin-top: 0.5em;
   margin-bottom: 1em;

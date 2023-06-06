@@ -1,4 +1,4 @@
-/* a.logo {
+a.logo {
     color: #1DB954;
     padding-left: 5%;
     font-size: x-large;
@@ -10,7 +10,7 @@ h1 {
     color: #FFFFFF;
     font-size: x-large;
     font-family: "Inter", Arial, Helvetica, sans-serif;
-} */
+}
 
 h1[id="username"] {
     color: #FFFFFF;
@@ -40,7 +40,7 @@ a.active {
     font-family: "Inter", Arial, Helvetica, sans-serif;
 }
 
-/* .navbar {
+.navbar {
     position: fixed;
     top: 0;
     z-index: 10;
@@ -60,7 +60,7 @@ a.active {
     align-content: flex-end;
     justify-content: center, space-between;
 
-} */
+}
 
 button[id="home-button"] {
 

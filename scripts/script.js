@@ -385,8 +385,9 @@ async function generatePlaylist(){
 
     await applyRules(playlist_id.playlist_id, rules);
     await buildPlaylist(playlist_id.playlist_id);
-    document.getElementById("playlist-link").href= playlist_id.url;
-    document.getElementById("playlist-link").innerHTML = form.elements[0].value;
+   
+   // document.getElementById("playlist-link").href= playlist_id.url;
+    //document.getElementById("playlist-link").innerHTML = form.elements[0].value;
 	document.getElementById("playlist-status").innerHTML = "Playlist Created! Enjoy :)";
 	document.getElementById("loading-animation").setAttribute("hidden", "hidden");
 
@@ -411,7 +412,9 @@ function collectRules(){
         if(type === "artist"){
             type = "Artist"
         }
-
+        if(type === "album"){
+            type = "Album"
+        }
         if(rulesList[i].childNodes[1].elements[0] == "add"){
             is_add = true;
         }

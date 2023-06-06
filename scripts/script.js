@@ -14,7 +14,7 @@ function addRule() {
 
     let newRule = ruleTemp.cloneNode("true");
     newRule = cleanClone(newRule);
-    
+
     document.getElementById("rules-list").insertBefore(newRule, document.getElementById("add-rule-btn"));
     newRule.scrollIntoView();
 }
@@ -35,12 +35,12 @@ function applyListeners(rule) {
         }
     });
 
-    ruleForm[2].addEventListener("keypress", async function(e){
-        if(e.key === "Enter"){
+    ruleForm[2].addEventListener("keypress", async function (e) {
+        if (e.key === "Enter") {
             e.preventDefault();
 
-            const searchResults =  await search(ruleForm[2].value, ruleForm[1].value);
-            displayResults(ruleForm,searchResults);
+            const searchResults = await search(ruleForm[2].value, ruleForm[1].value);
+            displayResults(ruleForm, searchResults);
             document.getElementById("search-results").style.display = "block"
 
         }
@@ -103,18 +103,18 @@ function applyDeleteFilter(rule) {
     })
 }
 
-async function search(searchTerm, type){
-	const response = await fetch("https://spotlist.patchyserver.xyz/api/search?types=" + type + "&query=" + searchTerm + "&limit=20&offset=0",{
-		method: 'GET',
-		headers: {
-			'Accept': 'application/json',
-			'user-id': getCookie("user_id"),
-			'token': getCookie("token")
-		}
-	}).catch((error)=>{
-		console.error('Error:',error);
-	})
-	return response.json();
+async function search(searchTerm, type) {
+    const response = await fetch("https://spotlist.patchyserver.xyz/api/search?types=" + type + "&query=" + searchTerm + "&limit=20&offset=0", {
+        method: 'GET',
+        headers: {
+            'Accept': 'application/json',
+            'user-id': getCookie("user_id"),
+            'token': getCookie("token")
+        }
+    }).catch((error) => {
+        console.error('Error:', error);
+    })
+    return response.json();
 }
 
 var modal = document.getElementById("search-results");
@@ -123,36 +123,36 @@ var span = document.getElementsByClassName("close")[0];
 
 
 
-span.onclick = function() {
-  modal.style.display = "none";
-}
-
-window.onclick = function(event) {
-  if (event.target == modal) {
+span.onclick = function () {
     modal.style.display = "none";
-  }
 }
 
-function displayResults(form, resultsJson){
-   document.getElementById("results").innerHTML = "";
+window.onclick = function (event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+}
 
-    if(form[1].value === "artist"){
+function displayResults(form, resultsJson) {
+    document.getElementById("results").innerHTML = "";
+
+    if (form[1].value === "artist") {
         displayArtists(form, resultsJson.artists);
     }
-    if(form[1].value === "playlist"){
-        displayPlaylists(form,resultsJson.playlists);
+    if (form[1].value === "playlist") {
+        displayPlaylists(form, resultsJson.playlists);
     }
-    if(form[1].value === "album"){
+    if (form[1].value === "album") {
         displayAlbums(form, resultsJson.albums);
     }
-    if(form[1].value == "track"){
+    if (form[1].value == "track") {
         displayTracks(form, resultsJson.tracks);
     }
 }
 
 
-function displayArtists(form, artistJson){
-    for(i = 0; i < artistJson.length; i++){
+function displayArtists(form, artistJson) {
+    for (i = 0; i < artistJson.length; i++) {
 
         const artist = {
             image: artistJson[i].images[0],
@@ -162,13 +162,13 @@ function displayArtists(form, artistJson){
             followers: artistJson[i].followers
         }
 
-        addArtistToSearchResults(form,artist);
+        addArtistToSearchResults(form, artist);
 
     }
 }
 
-function displayPlaylists(form,playlistJson){
-    for(i = 0; i < playlistJson.length; i++){
+function displayPlaylists(form, playlistJson) {
+    for (i = 0; i < playlistJson.length; i++) {
 
         const playlist = {
             image: playlistJson[i].images[0],
@@ -183,8 +183,8 @@ function displayPlaylists(form,playlistJson){
     }
 }
 
-function displayTracks(form, trackJson){
-    for(i = 0; i < trackJson.length; i++){
+function displayTracks(form, trackJson) {
+    for (i = 0; i < trackJson.length; i++) {
 
         const track = {
             image: trackJson[i].album.images[0],
@@ -199,8 +199,8 @@ function displayTracks(form, trackJson){
     }
 }
 
-function displayAlbums(form, albumJson){
-    for(i = 0; i < albumJson.length; i++){
+function displayAlbums(form, albumJson) {
+    for (i = 0; i < albumJson.length; i++) {
 
         const album = {
             image: albumJson[i].images[0],
@@ -215,7 +215,7 @@ function displayAlbums(form, albumJson){
     }
 }
 
-function addPlaylistToSearchResults(form, playlist){
+function addPlaylistToSearchResults(form, playlist) {
     const searchResults = document.getElementById("results");
 
     const result = document.createElement("div");
@@ -227,13 +227,13 @@ function addPlaylistToSearchResults(form, playlist){
     const total_tracks = createTotalTracks(playlist);
     const selectBtn = createSelectBtn(form, playlist);
 
-    result.append(cover,mainName,total_tracks, id, selectBtn);
+    result.append(cover, mainName, total_tracks, id, selectBtn);
 
     searchResults.append(result);
-    
+
 }
 
-function addArtistToSearchResults(form, artist){
+function addArtistToSearchResults(form, artist) {
     const searchResults = document.getElementById("results");
 
     const result = document.createElement("div");
@@ -245,13 +245,13 @@ function addArtistToSearchResults(form, artist){
     const followers = createFollowers(artist);
     const selectBtn = createSelectBtn(form, artist);
 
-    result.append(cover,mainName,followers, id, selectBtn);
+    result.append(cover, mainName, followers, id, selectBtn);
 
     searchResults.append(result);
-    
+
 }
 
-function addAlbumToSearchResults(form, album){
+function addAlbumToSearchResults(form, album) {
     const searchResults = document.getElementById("results");
 
     const result = document.createElement("div");
@@ -263,13 +263,13 @@ function addAlbumToSearchResults(form, album){
     const total_tracks = createTotalTracks(album);
     const selectBtn = createSelectBtn(form, album);
 
-    result.append(cover,mainName,total_tracks, id, selectBtn);
+    result.append(cover, mainName, total_tracks, id, selectBtn);
 
     searchResults.append(result);
-    
+
 }
 
-function addTrackToSearchResults(form, track){
+function addTrackToSearchResults(form, track) {
     const searchResults = document.getElementById("results");
 
     const result = document.createElement("div");
@@ -281,34 +281,34 @@ function addTrackToSearchResults(form, track){
     const artistName = createArtistName(track);
     const selectBtn = createSelectBtn(form, track);
 
-    result.append(cover,mainName,artistName, id, selectBtn);
+    result.append(cover, mainName, artistName, id, selectBtn);
 
     searchResults.append(result);
-    
+
 }
 
 
-function createSpotifyID(json){
-   const id = document.createElement("p")
-    id.textContent = "Spotify id: "+ json.id;
+function createSpotifyID(json) {
+    const id = document.createElement("p")
+    id.textContent = "Spotify ID: " + json.id;
     id.classList.add("searchID", "searchElement");
     return id;
 }
 
-function createCoverImg(json){
+function createCoverImg(json) {
     const img = document.createElement("img");
-    if(json.image == "undefined"){
-        img.src = "images/undefined-img.jpeg"   
+    if (json.image == "undefined") {
+        img.src = "images/undefined-img.jpeg"
     }
-    else{
-    img.src = json.image;
+    else {
+        img.src = json.image;
     }
     img.classList.add("searchIMG", "searchElement");
 
     return img;
 }
 
-function createMainName(json){
+function createMainName(json) {
     const name = document.createElement("a");
     name.innerHTML = json.name;
     name.href = json.url;
@@ -318,12 +318,12 @@ function createMainName(json){
     return name;
 }
 
-function createSelectBtn(form, json){
+function createSelectBtn(form, json) {
     const selectBtn = document.createElement("button");
     selectBtn.classList.add("selectBtn", "searchElement");
     selectBtn.textContent = "+";
 
-    selectBtn.addEventListener("click", function(){
+    selectBtn.addEventListener("click", function () {
         form[2].value = json.name;
         modal.style.display = "none";
 
@@ -332,14 +332,14 @@ function createSelectBtn(form, json){
     return selectBtn;
 }
 
-function createTotalTracks(json){
+function createTotalTracks(json) {
     const total_tracks = document.createElement("p");
-    total_tracks.textContent = "Total Tracks: " + json.total_tracks;
+    total_tracks.textContent = "Tracks: " + json.total_tracks;
     total_tracks.classList.add("searchTotalTracks", "searchElement");
     return total_tracks;
 }
 
-function createFollowers(json){
+function createFollowers(json) {
     const followers = document.createElement("p");
     followers.textContent = "Followers: " + json.followers;
     followers.classList.add("searchFollowers", "searchElement");
@@ -347,9 +347,9 @@ function createFollowers(json){
     return followers;
 }
 
-function createArtistName(json){
+function createArtistName(json) {
     const artistName = document.createElement("p");
-    artistName.textContent = "Artist Name: " + json.artistName;
+    artistName.textContent = json.artistName;
     artistName.classList.add("searchFollowers", "searchElement");
 
     return artistName;

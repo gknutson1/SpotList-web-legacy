@@ -11,7 +11,7 @@ a.logo {
   text-decoration: none;
 }
 
-.navbar{
+.navbar {
   position: fixed;
   top: 0;
   z-index: 10;
@@ -34,7 +34,7 @@ a.logo {
 }
 
 button[id="home-button"] {
-  
+
   color: #FFFFFF;
   font-size: medium;
   font-family: "Inter", Arial, Helvetica, sans-serif;
@@ -45,7 +45,7 @@ button[id="home-button"] {
 }
 
 button[id="click"] {
- 
+
   color: #FFFFFF;
   font-size: medium;
   font-family: "Inter", Arial, Helvetica, sans-serif;
@@ -55,20 +55,20 @@ button[id="click"] {
   padding: 6px 12px;
 }
 
-body{
+body {
   margin: 0;
   position: static;
   padding: 0;
   z-index: 9;
   min-height: 90vh;
   background-color: #000000;
-  background-image: linear-gradient(70deg, rgba(82, 48, 124, 0.4), rgb(0, 0, 0) );
+  background-image: linear-gradient(70deg, rgba(82, 48, 124, 0.4), rgb(0, 0, 0));
   accent-color: #FFFFFF;
   overflow-y: scroll;
 }
 
 
-h1{
+h1 {
   margin-left: 20%;
   margin-top: 0.5em;
   margin-bottom: 1em;
@@ -187,33 +187,33 @@ input[type="radio"] {
   font-size: medium;
   font-family: "Inter", Arial, Helvetica, sans-serif;
   margin-left: 20%;
-  margin-top: 0.5em;  
+  margin-top: 0.5em;
 }
 
 
-.rule{
-    width: 70%;
-    margin: auto;
+.rule {
+  width: 70%;
+  margin: auto;
 }
 
-.rules-creation{
-    display: flex;
-    flex-direction: row;
-    height: 40px;
-    width: 95%;
-    justify-content: space-evenly;
-    margin: 1em auto;
-    border: solid 2px white;
-    padding: 3em 2em;
-    border-radius: 20px;
+.rules-creation {
+  display: flex;
+  flex-direction: row;
+  height: 40px;
+  width: 95%;
+  justify-content: space-evenly;
+  margin: 1em auto;
+  border: solid 2px white;
+  padding: 3em 2em;
+  border-radius: 20px;
 }
 
-input[name="search-op"]{
-    width: 300px;
-    height: 40px;
-    align-items: center;
-    align-content: center;
-    margin: 0;
+input[name="search-op"] {
+  width: 300px;
+  height: 40px;
+  align-items: center;
+  align-content: center;
+  margin: 0;
 }
 
 .search {
@@ -229,8 +229,8 @@ input[name="search-op"]{
 }
 
 
-.filter-choice{
-    width: 200px;
+.filter-choice {
+  width: 200px;
 }
 
 .add {
@@ -260,7 +260,7 @@ input[name="search-op"]{
 }
 
 .filter-choice {
- 
+
   color: #FFFFFF;
   font-size: medium;
   font-family: "Inter", Arial, Helvetica, sans-serif;
@@ -268,7 +268,7 @@ input[name="search-op"]{
   border: 1px solid white;
   background-color: #000000;
   padding: 6px 12px;
-  
+
 }
 
 button[id="create-playlist"] {
@@ -294,11 +294,3 @@ button[class="button-op"] {
   background-color: #000000;
   padding: 6px 12px;
 }
-
-
-
-
-
-
-
-

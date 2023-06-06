@@ -104,7 +104,7 @@ function applyDeleteFilter(rule) {
 }
 
 async function search(searchTerm, type) {
-    const response = await fetch("https://spotlist.patchyserver.xyz/api/search?types=" + type + "&query=" + searchTerm + "&limit=20&offset=0", {
+    const response = await fetch("https://spotlist.patchyserver.xyz/api/search?types=" + type + "&query=" + searchTerm + "&limit=25&offset=0", {
         method: 'GET',
         headers: {
             'Accept': 'application/json',

@@ -24,7 +24,7 @@ function applyListeners(rule) {
     const ruleForm = rule.childNodes[1].elements;
 
     ruleForm[1].addEventListener("change", function () {
-        if (ruleForm[1].value.match(/^released./)) {
+        if (ruleForm[1].value.match(/.Date$/)) {
             ruleForm[2].type = "date";
             ruleForm[2].value = "2016-10-13";
         }
@@ -380,8 +380,8 @@ async function generatePlaylist(){
 
     const rules = collectRules();
 
-    await applyRules(playlist_id, rules);
-    await buildPlaylsit(playlist_id);
+    await applyRules(playlist_id.playlist_id, rules);
+    await buildPlaylsit(playlist_id.playlist_id);
 }
 
 function collectRules(){
@@ -397,6 +397,13 @@ function collectRules(){
 
         let is_add;
 
+
+        let type = rulesList[i].childNodes[1].elements[1].value;
+
+        if(type === "artist"){
+            type = "Artist"
+        }
+
         if(rulesList[i].childNodes[1].elements[0] == "add"){
             is_add = true;
         }
@@ -405,7 +412,7 @@ function collectRules(){
         }
 
         const ruleFormatted = {
-            type: rulesList[i].childNodes[1].elements[1].value,
+            type: type,
             data: data,
             is_add: is_add
         }
@@ -459,9 +466,6 @@ async function buildPlaylsit(p_id){
 			'Accept': 'application/json',
 			'user-id': getCookie("user_id"),
 			'token': getCookie("token")
-		},
-		body:
-			JSON.stringify(rules)
+		}
     });
-}
 }

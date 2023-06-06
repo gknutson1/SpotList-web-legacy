@@ -47,9 +47,9 @@ button[id="home-button"] {
   font-size: medium;
   font-family: "Inter", Arial, Helvetica, sans-serif;
   display: inline-block;
-  border: 1px solid #1DB954;
-  background-color: #000000;
-  padding: 6px 12px;
+  border: none;
+  background: none;
+  padding: 0;
 }
 
 button[id="click"] {
@@ -58,9 +58,9 @@ button[id="click"] {
   font-size: medium;
   font-family: "Inter", Arial, Helvetica, sans-serif;
   display: inline-block;
-  border: 1px solid #1DB954;
-  background-color: #000000;
-  padding: 6px 12px;
+  border: none;
+  background: none;
+  padding: 0;
 }
 
 body {
